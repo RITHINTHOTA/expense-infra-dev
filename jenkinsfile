@@ -1,0 +1,37 @@
+pipeline {
+    agent {
+        label 'AGENT-1'
+    }
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage('init') {
+            steps {
+                sh """
+                ls -ltr
+                """
+            }
+        }
+        stage('plan') {
+            steps {
+                sh 'echo this is test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo this is deploy'
+            }
+        }
+          
+    }
+    post{
+        success{
+             echo "It will run when the pipeline is success"
+        }
+        failure {
+             echo "It will run when the pipeline is failure" 
+        }
+    }
+}        
