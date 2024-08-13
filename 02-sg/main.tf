@@ -208,4 +208,14 @@ resource "aws_security_group_rule" "bastion_public" {
   cidr_blocks = ["0.0.0.0/0"]# source is where you are getting the traffic
   security_group_id = module.bastion.sg_id
 }
+#added as a part jenkins CICD
+resource "aws_security_group_rule" "backend_default_vpc" { #tools kosam........ekkada default vpc nduku echam ante manam mana tools like jenkins ne default vpc lone create chesam kabatte.... elano manaki peering undhi kabatte default vpc nunchi vache danini mana expense vpc accept chestundhi
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks = ["172.31.0.0/16"]# default vpc cidr
+  security_group_id = module.backend.sg_id
+}
+
 
